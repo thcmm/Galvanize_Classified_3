@@ -1,0 +1,181 @@
+<div class="container-fluid">
+    <!-- Listing Block -->
+    <h3 class="text-right">Classified List</h3>
+    <!-- START: BUTTON GROUP -->
+    <!-- TODO Fix button size -->
+    <div class="row btn-group btn-group-xs" role="group" aria-label="...">
+      <div class="col-md-3">
+          <p><a class="btn btn-default" ng-click="$ctrl.toggleView1()">Layout 1</a></p>
+      </div>
+      <div class="col-md-3">
+          <p><a class="btn btn-default" ng-click="$ctrl.toggleView2()">Layout 2</a></p>
+      </div>
+      <div class="col-md-3">
+          <p><a class="btn btn-default" ng-click="$ctrl.toggleView3()">Layout 3</a></p>
+      </div>
+    </div>
+    <!-- END: BUTTON GROUP -->
+    <!-- START: Filter & Create Advert -->
+    <div class="row"  style="float: right">
+        <div class="col-md-2 text-right">Filter by:</div>
+        <!-- Filter Input -->
+        <div class="col-md-4 text-right" role="presentation" class="active">
+            <input type="search" ng-model="$ctrl.searchBy" class="form-control input-sm search-form" placeholder="Filter">
+        </div>
+        <div class="col-md-6">
+            <p><a class="btn btn-primary" style="margin-left: 6em;" ng-click="$ctrl.toggleCreateClassifiedBlock()">Create New Advert</a></p>
+        </div>
+    </div>
+    <!-- Creat Classified -->
+    <div class="row" ng-if="$ctrl.showCreateClassified == true">
+        <h4 class="text-left">Create Classified</h4>
+        <div class="well well-sm" style="background: rgb(220,220,220);">
+            <form ng-submit="$ctrl.createClassified()">
+                <!-- Title  -->
+                <label for="title"></label>
+                <input ng-model="$ctrl.classified.title" type="text" name="title" placeholder="Title">
+                <!-- Description -->
+                <label for="description"></label>
+                <input ng-model="$ctrl.classified.description" type="text" name="description" placeholder="Description">
+                <!-- Price -->
+                <label for="price"></label>
+                <input ng-model="$ctrl.classified.price" type="text" name="price" placeholder="Price">
+                <!-- IMG URL -->
+                <label for="item_image"></label>
+                <input ng-model="$ctrl.classified.item_image" type="text" name="item_image" placeholder="Empty autofills RND url">
+                <!-- Submit -->
+                <button class="btn btn-info" id="submitButton" type="button" name="button" ng-click="$ctrl.createClassified()">SUBMIT</button>
+            </form>
+        </div>
+    </div>
+    <!-- END: Filter & Create Advert -->
+    <!-- ******* START: LAYOUT 1 ******* -->
+    <div class="well well-lg" style="background: rgb(184,184,184);" ng-if="$ctrl.showView1 == true">
+        <!-- Column Titles -->
+        <div class="row well well-sm" style="font-weight: 900;background: rgb(160,160,160);">
+            <div class="col-md-1"><a ng-click="$ctrl.sortClassifieds('id')">ID</a></div>
+            <div class="col-md-1"><a ng-click="$ctrl.sortClassifieds('date')">Date</a></div>
+            <div class="col-md-2">Title</a>
+            </div>
+            <div class="col-md-2">Description</div>
+            <div class="col-md-2"><a ng-click="$ctrl.sortClassifieds('price')">Price</a></div>
+            <div class="col-md-4">Image</div>
+        </div>
+        <!-- List Classifieds -->
+        <div class="container-fluid" id="classifiedContainer" ng-repeat="classified in $ctrl.classifieds | orderBy: $ctrl.sortClassifiedBy | filter: $ctrl.searchBy">
+            <div class="row">
+                <!-- ID -->
+                <div class="col-md-1"><span class="badge">{{classified.id}}</span></div>
+                <!-- Date -->
+                <div class="col-md-1">{{ classified.created_at | date:'shortDate'}}</div>
+                <!-- Title -->
+                <div class="col-md-2"><strong><a ui-sref="classified-detail({id: classified.id})">{{classified.title}}</strong></a>
+                </div>
+                <!-- Description -->
+                <div class="col-md-2">{{classified.description}}</div>
+                <!-- Price -->
+                <div class="col-md-2">${{classified.price}}</div>
+                <!-- ITEM_IMG -->
+                <div class="col-md-4"><img style="margin:2px" ng-src="{{classified.item_image}}" width="40" height="40"></div>
+            </div>
+        </div>
+    </div>
+    <!-- ******* END: LAYOUT 1 ******* -->
+    <!-- ******* START: LAYOUT 2 ******* -->
+    <div class="well well-lg" style="background: rgb(184,184,184);" ng-if="$ctrl.showView2 == true">
+        <!-- Column Titles -->
+        <div class="row well well-sm" style="font-weight: 900;background: rgb(191,191,191);">
+            <div class="col-md-1"><a ng-click="$ctrl.sortClassifieds('id')">ID</a></div>
+            <div class="col-md-1"><a ng-click="$ctrl.sortClassifieds('date')">Date</a></div>
+            <div class="col-md-2">Title</a>
+            </div>
+            <div class="col-md-2">Description</div>
+            <div class="col-md-2"><a ng-click="$ctrl.sortClassifieds('price')">Price</a></div>
+            <div class="col-md-4">Image</div>
+        </div>
+        <!-- List Classifieds -->
+        <div class="container-fluid list-group" id="classifiedContainer" style="font-weight: 900;background: rgb(191,191,191);" ng-repeat="classified in $ctrl.classifieds | orderBy: $ctrl.sortClassifiedBy | filter: $ctrl.searchBy">
+          <div class="list-group-item">
+            <div class="row">
+                <div class="col-md-1"><span class="badge">{{classified.id}}</span></div>
+                <div class="col-md-1">{{ classified.created_at | date:'shortDate'}}</div>
+                <div class="col-md-2"><strong><a ui-sref="classified-detail({id: classified.id})">{{classified.title}}</strong></a>
+                </div>
+                <div class="col-md-2">{{classified.description}}</div>
+                <div class="col-md-2">${{classified.price}}</div>
+                <div class="col-md-4"><img style="margin:2px" ng-src="{{classified.item_image}}" width="40" height="40"></div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- ******* END: LAYOUT 2 ******* -->
+    <!-- ******* START: LAYOUT 3 ******* -->
+    <div class="container-fluid  media list-group" id="classifiedContainer" style="font-weight: 900;background: rgb(191,191,191);" ng-repeat="classified in $ctrl.classifieds | orderBy: $ctrl.sortClassifiedBy | filter: $ctrl.searchBy" ng-if="$ctrl.showView3 == true">
+    <div class="list-group-item">
+      <div class="media-left">
+        <a href="#">
+          <img class="media-object" style="margin:2px" ng-src="{{classified.item_image}}" width="65" height="65">
+        </a>
+        <div class="col-md-2"><span class="badge">ID: {{classified.id}}</span></div>
+      </div>
+      <div class="media-body">
+        <div class="row">
+            <div class="col-md-4"><h4 class="media-heading">{{classified.title}}</h4></div>
+            <div class="col-md-4">{{ classified.created_at | date:'shortDate'}}</div>
+        </div>
+
+        <div class="row">
+        <div class="col-md-4">{{classified.description}}</div>
+        <div class="col-md-4">${{classified.price}}</div>
+        </div>
+      </div>
+  </div>
+ </div>
+<!-- ******* END: LAYOUT 3 ******* -->
+
+    <!-- ******* START: Unique Filter TESTING ******* -->
+    <div class="row">
+
+        <!-- START: TEST 1 Filtered Text Search -->
+        <!-- <div class="row">
+            <label>Search: <input ng-model="searchText"></label>
+            <table id="searchTextResults">
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                </tr>
+                <tr ng-repeat="classified in $ctrl.classifieds | filter:searchText">
+                    <td>{{classified.title}}</td>
+                    <td>{{classified.description}}</td>
+                </tr>
+            </table>
+        </div> -->
+        <!-- END: TEST 1 Filtered Text Search -->
+        <!-- START: TEST 2 Filtered Text Search -->
+        <!-- <div class="row">
+            <label>Any: <input ng-model="search.$"></label> <br>
+            <label>Title only <input ng-model="search.title"></label><br>
+            <label>Description only <input ng-model="search.description"></label><br>
+            <table id="searchObjResults">
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                </tr>
+                <tr ng-repeat="classifiedObj in $ctrl.classifieds | filter:search:strict">
+                    <td>{{classifiedObj.title}}</td>
+                    <td>{{classifiedObj.description}}</td>
+                    <td>{{classifiedObj.price}}</td>
+                </tr>
+            </table>
+        </div> -->
+        <!-- END: TEST 2 Filtered Text Search -->
+    </div>
+    <!-- ******* END: Unique Filter TESTING ******* -->
+</div>
+
+<!-- Grrrrrr!!!! tamai mai taam??? <table>
+  <tr ng-repeat="classified in $ctrl.classifieds">
+    <td><a ui-sref="classified-detail({id: classified.id})"></td>
+    <td>{{ classified.description }}</td>
+  </tr>
+</table> -->

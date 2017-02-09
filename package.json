@@ -1,0 +1,33 @@
+{
+  "name": "galvanize-classified-ad",
+  "version": "1.0.0",
+  "main": "app.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node ./bin/www",
+    "test": "mocha"
+  },
+  "keywords": [],
+  "author": "TPS",
+  "description": "Q3 Assessment",
+  "dependencies": {
+    "angular": "^1.6.0",
+    "angular-moment": "^1.0.1",
+    "angular-ui-router": "1.0.0-beta.3",
+    "body-parser": "^1.16.0",
+    "bootstrap": "^3.3.7",
+    "browser-sync": "^2.18.6",
+    "cookie-parser": "^1.4.3",
+    "dotenv": "^4.0.0",
+    "express": "^4.14.0",
+    "jquery": "^3.1.1",
+    "knex": "^0.12.6",
+    "moment": "^2.17.1",
+    "pg": "^6.1.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
+    "supertest": "^2.0.1"
+  }
+}

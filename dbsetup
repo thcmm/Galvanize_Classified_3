@@ -1,0 +1,2 @@
+dropdb classified_test
+createdb classified_test
